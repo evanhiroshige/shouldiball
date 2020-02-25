@@ -22,11 +22,6 @@ court_name_to_url_map = {
 }
 
 def get_basketball_courts_summary():
-<<<<<<< HEAD
-
-=======
-  sys.
->>>>>>> 676e1be8897eaa89f9eab43782cab2109bca51fd
   output = '\nMarino Court Schedule:\n'
   court_schedules = fetch_court_schedules_for_today()
   now = datetime.now()
