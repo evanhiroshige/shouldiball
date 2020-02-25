@@ -20,7 +20,6 @@ def get_courts_summary():
   for schedule in schedules:
     for booking in schedule:
       print(booking.name, booking.start_time, booking.end_time)
-
       if booking.isScheduledDuring(datetime.datetime.now()):
         print(booking.name, booking.start_time, booking.end_time)
 
@@ -30,7 +29,7 @@ def fetch_courts_schedule():
   driver.implicitly_wait(10)
   schedules = []
   today = datetime.datetime.today()
-  day_of_month = str((today.day - 1))
+  day_of_month = str((today.day))
   try:
     for url in COURT_SCHEDULE_URLS:
       schedule_fetcher = DailyScheduleFetcher(driver)
