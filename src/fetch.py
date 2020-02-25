@@ -18,8 +18,8 @@ def get_basketball_courts_summary():
   for schedule in schedules:
     for booking in schedule:
       print(booking.name, booking.start_time, booking.end_time)
+      court_count = 0
       if booking.isScheduledDuring(datetime.now()):
-        court_count = 0
         if booking.name == 'Open Basketball':
           court_count += 1
         print(booking.name, booking.start_time, booking.end_time)
