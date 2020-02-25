@@ -29,16 +29,15 @@ class DailyScheduleFetcher:
 
       if (date_element.text == day_of_month):
         events = day_element.find_elements_by_class_name('booking-event')
-        return self.parse_events_to_daily_schedule(events)
+        return self.parse_events_to_daily_bookings(events)
 
-  def parse_events_to_daily_schedule(self, events):
+  def parse_events_to_daily_bookings(self, events):
     bookings = []
     for event in events:
       event_name = event.find_element_by_xpath('.//div[1]/span').text
       event_time_start = event.find_element_by_xpath('.//div[2]/span[1]').text
       event_time_end = event.find_element_by_xpath('.//div[2]/span[2]').text
       bookings.append(self.build_booking(event_name, event_time_start, event_time_end))
-      print(event_name + " from " + event_time_start + " " + event_time_end)
     return bookings
 
   def build_booking(self, event_name, event_time_start, event_time_end):
@@ -54,7 +53,7 @@ class DailyScheduleFetcher:
 
     end_time = datetime_NY.strptime(event_time_end, '- %I:%M%p')
     end_date_time = datetime_NY.combine(end_date, end_time.time())
-    if start_date_time.hour >= 12:
+    if start_date_time.hour >= 12 and end_date_time.hour <= 12:
       tomorrow = datetime.now() + timedelta(days=1)
       end_date_time = datetime_NY.combine(tomorrow.date(), end_time.time())
 
