@@ -1,21 +1,10 @@
 from datetime import datetime, timedelta
 from DailyScheduleFetcher import DailyScheduleFetcher
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
 from Booking import Booking
 from CourtSchedule import CourtSchedule
+import Driver
 
-DRIVER_PATH = '/Users/ehiroshige/dev/driver/chromedriver'
-chrome_options = Options()
-#chrome_options.add_argument("--disable-extensions")
-#chrome_options.add_argument("--disable-gpu")
-#chrome_options.add_argument("--no-sandbox) # linux only
-chrome_options.add_argument("--headless")
-driver = webdriver.Chrome(options=chrome_options, executable_path=DRIVER_PATH)
-driver.implicitly_wait(10)
+driver = Driver.driver()
 
 COURT_THREE_URL = 'https://nuevents.neu.edu/CustomBrowseEvents.aspx?data=pw7uNs6e9v8qbfdIsvc5fDYq1MFunilYcWUxDMrP56yKqAjIwwaKA11U%2fQckiFjB2tWbX%2fc8606fDHS3t5PPuSnrcoE8cTQGmAOsO4wdf4ZaUfDtNt1OGQ%3d%3d'
 COURT_TWO_URL = 'https://nuevents.neu.edu/CustomBrowseEvents.aspx?data=8dCpAXZOtNUwCu7Xw7lFdvnMLXWJvC%2fXnljDAys%2fqmQx5OHc0kgRwku22rLLnqz9V187%2fQc5LcOubs4EolABUmZFwTbc8EyCREjolwr1Ekq69xl3QSidow%3d%3d'
