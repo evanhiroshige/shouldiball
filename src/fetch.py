@@ -24,7 +24,7 @@ NY_TIMEZONE = pytz.timezone('America/New_York')
 
 def get_basketball_courts_summary():
   clear()
-  output = '\nMarino Court Schedule:\n'
+  output = '\nMarino Court Schedule\n'
   court_schedules = fetch_court_schedules_for_today()
   now = getNow()
   open_court_count = 0
@@ -45,9 +45,7 @@ def get_basketball_courts_summary():
       open_court_count += 1
   courtWord = 'court' if open_court_count == 1 else 'courts'
   output += '\n' + str(open_court_count) + ' ' + courtWord + ' is currently open.\n'
-
   output += 'The potential wait time is ' + getPotentialWaitTime(open_court_count) + '.\n'
-
   return output
 
 def getPotentialWaitTime(open_court_count):

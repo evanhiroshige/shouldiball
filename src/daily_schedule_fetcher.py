@@ -18,16 +18,13 @@ class DailyScheduleFetcher:
     return daily_schedule
 
   def _get_daily_elements(self):
-
     weekly_schedule_element = WebDriverWait(self.driver, 10).until(
         EC.presence_of_element_located((By.ID, 'weeklyResults')))
-    # weekly_schedule_element = self.driver.find_element_by_id('weeklyResults')
     return weekly_schedule_element.find_elements_by_class_name('calendar-cell-container')
 
   def _get_daily_schedule(self, daily_elements, day_of_month):
     for day_element in daily_elements:
       date_element = day_element.find_element_by_class_name('calendar-event')
-
       if (date_element.text == day_of_month):
         events = day_element.find_elements_by_class_name('booking-event')
         return self._parse_events_to_daily_bookings(events)

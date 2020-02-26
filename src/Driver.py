@@ -10,5 +10,5 @@ def driver():
   chrome_options = Options()
   chrome_options.add_argument("--headless")
   driver = webdriver.Chrome(options=chrome_options, executable_path=DRIVER_PATH)
-  driver.implicitly_wait(5)
+  driver.implicitly_wait(10)
   return driver
