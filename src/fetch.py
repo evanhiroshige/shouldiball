@@ -23,7 +23,7 @@ NY_TIMEZONE = pytz.timezone('America/New_York')
 def get_basketball_courts_summary():
   output = '\nMarino Court Schedule:\n'
   court_schedules = fetch_court_schedules_for_today()
-  now = datetime.now()
+  now = getNow()
   open_court_count = 0
   for court_schedule in court_schedules:
     no_booking_on_court = True
@@ -44,7 +44,6 @@ def get_basketball_courts_summary():
   output += '\n' + str(open_court_count) + ' ' + courtWord + ' currently open.\n'
   return output
 
-
 def fetch_court_schedules_for_today():
   schedules = []
   today = datetime.today()
@@ -62,5 +61,8 @@ def fetch_court_schedules_for_today():
     driver.quit()
   return schedules
 
-
-
+def getNow():
+  now = datetime.now()
+  if now.hour <= 1:
+    now = now - timedelta(days=1)
+  return now
