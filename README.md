@@ -1,3 +1,3 @@
 # shouldiball
 
-run main.py yeet
+`$ ./src/main.py path/to/web/driver`
