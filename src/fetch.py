@@ -2,8 +2,10 @@ from datetime import datetime, timedelta
 from daily_schedule_fetcher import DailyScheduleFetcher
 from booking import Booking
 from court_schedule import CourtSchedule
+from clear import clear
 import pytz
 import driver
+
 
 driver = driver.driver()
 
@@ -41,22 +43,42 @@ def get_basketball_courts_summary():
       output += court_schedule.name + ": Open Basketball until " + d.strftime("%I:%M %p") + '\n'
       open_court_count += 1
     courtWord = 'court' if open_court_count == 1 else 'courts'
-  output += '\n' + str(open_court_count) + ' ' + courtWord + ' currently open.\n'
+  output += '\n' + str(open_court_count) + ' ' + courtWord + ' is currently open.\n'
+
+  output += 'The potential wait time is ' + getPotentialWaitTime(open_court_count) + '.\n'
+
   return output
+
+def getPotentialWaitTime(open_court_count):
+  if open_court_count is 0:
+    return 'very high'
+  if open_court_count is 1:
+    return 'high'
+  elif open_court_count is 2:
+    return 'medium'
+  elif open_court_count >= 3:
+    return 'low'
+
+
+
 
 def fetch_court_schedules_for_today():
   schedules = []
   today = datetime.today()
   day_of_month = str(today.day)
   now = datetime.now(NY_TIMEZONE)
+  cur_step = 1
+  total_steps = len(court_name_to_url_map.keys())
   try:
     for court_name in court_name_to_url_map.keys():
       schedule_fetcher = DailyScheduleFetcher(driver, now)
-      print('Fetching ' + court_name.lower() + ' schedule...')
+      print('Step ' + str(cur_step) + ' of ' + str(total_steps) + ':\nFetching ' + court_name.lower() + ' schedule...')
       court_bookings = schedule_fetcher.fetch(court_name_to_url_map[court_name], day_of_month)
-      if (court_bookings == None):
-        print('An issue occurred while fetching the schedule for the ' + court_name.lower())
       schedules.append(CourtSchedule(court_name, court_bookings))
+      cur_step += 1
+      clear()
+  except:
+    print('An issue occurred while fetching a schedule')
   finally:
     driver.quit()
   return schedules
