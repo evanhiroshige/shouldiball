@@ -23,6 +23,7 @@ court_name_to_url_map = {
 NY_TIMEZONE = pytz.timezone('America/New_York')
 
 def get_basketball_courts_summary():
+  clear()
   output = '\nMarino Court Schedule:\n'
   court_schedules = fetch_court_schedules_for_today()
   now = getNow()
@@ -58,8 +59,6 @@ def getPotentialWaitTime(open_court_count):
     return 'medium'
   elif open_court_count >= 3:
     return 'low'
-
-
 
 
 def fetch_court_schedules_for_today():
