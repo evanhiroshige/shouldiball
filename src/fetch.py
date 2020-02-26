@@ -45,11 +45,13 @@ def get_basketball_courts_summary():
 def fetch_court_schedules_for_today():
   schedules = []
   today = datetime.today()
-  day_of_month = str((today.day))
+  day_of_month = str(today.day)
   try:
     for court_name in court_name_to_url_map.keys():
       schedule_fetcher = DailyScheduleFetcher(driver)
       court_bookings = schedule_fetcher.fetch(court_name_to_url_map[court_name], day_of_month)
+      if (court_bookings == None):
+        print('An issue occurred while fetching the schedule for Marino\'s' + court_name.lower())
       schedules.append(CourtSchedule(court_name, court_bookings))
   finally:
     driver.quit()
