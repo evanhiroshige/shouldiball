@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
-from DailyScheduleFetcher import DailyScheduleFetcher
-from Booking import Booking
-from CourtSchedule import CourtSchedule
-import Driver
+from daily_schedule_fetcher import DailyScheduleFetcher
+from booking import Booking
+from court_schedule import CourtSchedule
+import driver
 
-driver = Driver.driver()
+driver = driver.driver()
 
 COURT_THREE_URL = 'https://nuevents.neu.edu/CustomBrowseEvents.aspx?data=pw7uNs6e9v8qbfdIsvc5fDYq1MFunilYcWUxDMrP56yKqAjIwwaKA11U%2fQckiFjB2tWbX%2fc8606fDHS3t5PPuSnrcoE8cTQGmAOsO4wdf4ZaUfDtNt1OGQ%3d%3d'
 COURT_TWO_URL = 'https://nuevents.neu.edu/CustomBrowseEvents.aspx?data=8dCpAXZOtNUwCu7Xw7lFdvnMLXWJvC%2fXnljDAys%2fqmQx5OHc0kgRwku22rLLnqz9V187%2fQc5LcOubs4EolABUmZFwTbc8EyCREjolwr1Ekq69xl3QSidow%3d%3d'
