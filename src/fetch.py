@@ -43,7 +43,7 @@ def get_basketball_courts_summary():
       d = datetime.strptime(next_booking_start_time_template, "%H:%M:%S")
       output += court_schedule.name + ": Open Basketball until " + d.strftime("%I:%M %p") + '\n'
       open_court_count += 1
-  courtWord = 'court is' if open_court_count == 1 else 'courts are''
+  courtWord = 'court is' if open_court_count == 1 else 'courts are'
   output += '\n' + str(open_court_count) + ' ' + courtWord + ' currently open.\n'
   output += 'The potential wait time is ' + getPotentialWaitTime(open_court_count) + '.\n'
   return output
